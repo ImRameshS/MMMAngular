@@ -17,9 +17,11 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch','datatables'
   ])
-  .config(function ($routeProvider) {
+  .constant('BASE_API_URL',
+    'http://apps.gaintheory.tools/MMMWCFTEST/Service1.svc')
+  .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -31,7 +33,18 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/Landing', {
+        templateUrl: 'views/Landing.html',
+        //controller: 'LandingCtrl',
+        //controllerAs: 'landing'
+      })
+      .when('/MMMLanding', {
+        templateUrl: 'views/mmmlanding.html',
+        //controller: 'MmmlandingCtrl',
+      //controllerAs: 'MMMLanding'
+      })
       .otherwise({
         redirectTo: '/'
       });
+      $locationProvider.hashPrefix('');
   });

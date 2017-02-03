@@ -1,0 +1,31 @@
+angular.module('mmmangularApp')
+  .controller('LandingCtrl', WithAjaxCtrl);
+  function WithAjaxCtrl(DTOptionsBuilder, DTColumnBuilder) {
+    var vm = this;
+    vm.dtOptions = DTOptionsBuilder.newOptions()
+        .withOption('ajax', {
+             url: '/serverside/url/here',
+             type: 'POST',
+             data: function(data, dtInstance) {
+                 // Modify the data object properties here before being passed to the server
+             }
+         })
+         .withDataProp('data')
+         .withOption('serverSide', true);
+
+
+
+     vm.dtOptions = DTOptionsBuilder.fromSource('data.json')
+         .withPaginationType('full_numbers');
+     vm.dtColumns = [
+         DTColumnBuilder.newColumn('id').withTitle('ID'),
+         DTColumnBuilder.newColumn('firstName').withTitle('First name'),
+         DTColumnBuilder.newColumn('lastName').withTitle('Last name').notVisible()
+     ];
+  });
+--to  create new view
+yo angular:route myroute
+myroute is a name of a view
+-- To create new service
+yo angular:service dataservice
+dataservice is a name of service file
